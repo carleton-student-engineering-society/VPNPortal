@@ -2,8 +2,8 @@
 set -e
 cd /etc/openvpn/
 
-if [ $# -ne 3 ]; then
-        echo "Usage: ./gen_cert.sh <dir> <username> <password>"
+if [ $# -ne 2 ]; then
+        echo "Usage: ./gen_cert.sh <dir> <username>"
         exit 1
 fi
 
@@ -22,9 +22,9 @@ export EASYRSA_CERT_EXPIRE=$(( ($(date --date "${YEAR}0501" +%s) - $(date +%s) )
 echo "Cert will expire in $EASYRSA_CERT_EXPIRE days"
 
 if [ ! -f "pki/private/$2.key" ]; then
-        ./easyrsa gen-req --batch $2 nopass
+        ./easyrsa --batch gen-req $2 nopass
 fi
-./easyrsa sign-req --batch --passin pass:$3 client $2
+./easyrsa --batch sign-req client $2
 
 cp template.ovpn clients/$2.ovpn
 cat pki/issued/$2.crt >> clients/$2.ovpn

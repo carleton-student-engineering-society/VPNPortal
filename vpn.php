@@ -26,8 +26,10 @@ if ($ds){
 
         $info = ldap_get_entries($ds, $result);
         $found = false;
-        foreach ($info as $group){
-                $cn = $group["cn"][0];
+	foreach ($info as $g){
+		if (!isset($g["cn"]))
+			continue;
+		$cn = $g["cn"][0];
                 if ($cn == $group){
                     $found = true;
                 }
@@ -35,9 +37,11 @@ if ($ds){
         if (!$found){
             die("No access to group!");
         }
-        $dir = $dirs[$group];
-        $pass = $ca_pass[$group];
-        shell_exec("./gen_cert.sh \"$dir\" \"$uid\" \"$pass\"");
+	$dir = $dirs[$group];
+	unlink("/etc/openvpn/$dir/clients/$uid.ovpn");
+	unlink("/etc/openvpn/$dir/pki/issued/$uid.crt");
+	shell_exec("./gen_cert.sh \"$dir\" \"$uid\"");
+	echo "Exec finished!";
         readfile("/etc/openvpn/$dir/clients/$uid.ovpn");
     }else{
         echo "Incorrect password!";
