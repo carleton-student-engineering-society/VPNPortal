@@ -6,8 +6,8 @@
 <label for="group">Network: </label><select name="group" id="group">
 <option value="csesnet">CSESNet</option>
 <option value="afnet">AFNet</option>
-</select>
-<input id="submit" name="submit" type="submit">
+</select><br>
+<input id="submit" name="submit" type="submit" value="Request VPN Access">
 </form>
 
 <p>
