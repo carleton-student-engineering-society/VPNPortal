@@ -36,7 +36,8 @@ if ($ds){
             die("No access to group!");
         }
         $dir = $dirs[$group];
-        shell_exec("./gen_cert.sh \"$dir\" \"$uid\" \"$ca_pass\"");
+        $pass = $ca_pass[$group];
+        shell_exec("./gen_cert.sh \"$dir\" \"$uid\" \"$pass\"");
         readfile("/etc/openvpn/$dir/clients/$uid.ovpn");
     }else{
         echo "Incorrect password!";
