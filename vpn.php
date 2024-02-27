@@ -8,13 +8,13 @@ ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
 ldap_set_option($ds, LDAP_OPT_REFERRALS, 0);
 
 if ($ds){
-    $uid = $POST['username'];
+    $uid = $_POST['username'];
     if(!ctype_alnum($uid)){
         die("Invalid username!");
     }
     $username = 'uid='.$uid.",ou=users,".$ldapbase;
-    $password = $POST['password'];
-    $group = $POST['group'];
+    $password = $_POST['password'];
+    $group = $_POST['group'];
     if (!in_array($group, $allowed, $strict=true)){
         die("Selected group is not allowed!");
     }
