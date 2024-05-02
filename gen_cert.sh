@@ -7,6 +7,16 @@ if [ $# -ne 2 ]; then
         exit 1
 fi
 
+if ! [ "$1" == "easy-rsa" ] && ! [ "$1" == "affiliate-rsa" ]; then
+        echo "Invalid directory!"
+        exit 2
+fi
+
+if [[ "$2" =~ [^a-zA-Z0-9] ]]; then
+        echo "Invalid username!"
+        exit 3
+fi
+
 cd $1
 
 # Finds difference between current date and the next April 31st
