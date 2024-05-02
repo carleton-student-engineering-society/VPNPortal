@@ -7,20 +7,20 @@
 
 int main(int argc, char **argv){
     if (argc != 3){
-        printf("Usage: ./gen_cert <dir> <username>");
+        printf("%i - Usage: ./gen_cert <dir> <username>\n", argc);
         return 1;
     }
     if (strcmp("easy-rsa", argv[1]) != 0 && strcmp("affiliate-rsa", argv[1]) != 0){
-        printf("Invalid directory!");
+        printf("Invalid directory!\n");
         return 2;
     }
     if (strlen(argv[2]) > 100){
-        printf("Invalid username!");
+        printf("Invalid username!\n");
         return 3;
     }
     for(int i = 0; i < strlen(argv[2]); i++){
         if (!isalnum(argv[2][i])){
-            printf("Invalid username!");
+            printf("Invalid username!\n");
             return 3;
         }
     }
