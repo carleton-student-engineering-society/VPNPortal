@@ -41,7 +41,7 @@ if ($ds){
 		$dir = $dirs[$group];
 		unlink("/etc/openvpn/$dir/clients/$uid.ovpn");
 		unlink("/etc/openvpn/$dir/pki/issued/$uid.crt");
-		shell_exec("./gen_cert.sh \"$dir\" \"$uid\"");
+		shell_exec("./gen_cert \"$dir\" \"$uid\"");
 		$file = "/etc/openvpn/$dir/clients/$uid.ovpn";
 		header('Content-Description: File Transfer');
 		header('Content-Type: application/octet-stream');
