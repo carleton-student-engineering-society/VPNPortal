@@ -7,7 +7,7 @@
 
 int main(int argc, char **argv){
     if (argc != 3){
-        printf("%i - Usage: ./gen_cert <dir> <username>\n", argc);
+        printf("Usage: ./gen_cert <dir> <username>\n", argc);
         return 1;
     }
     if (strcmp("easy-rsa", argv[1]) != 0 && strcmp("affiliate-rsa", argv[1]) != 0){
@@ -25,6 +25,8 @@ int main(int argc, char **argv){
         }
     }
     setuid(0);
-    system("/var/www/html/VPNPortal/gen_cert.sh");
+    char buffer[200];
+    snprintf(buffer, sizeof(buffer), "/var/www/html/VPNPortal/gen_cert.sh %s %s", argv[1], argv[2]);
+    system(buffer);
     return 0;
 }
