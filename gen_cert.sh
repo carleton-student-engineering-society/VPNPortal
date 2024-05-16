@@ -32,7 +32,7 @@ export EASYRSA_CERT_EXPIRE=$(( ($(date --date "${YEAR}0501" +%s) - $(date +%s) )
 echo "Cert will expire in $EASYRSA_CERT_EXPIRE days"
 
 if [ ! -f "pki/private/$2.key" ]; then
-        ./easyrsa --batch gen-req $2 nopass
+        ./easyrsa --batch --req-c CA --req-st Ontario --req-city Ottawa --req-org CSES --req-cn $2 gen-req $2 nopass
 fi
 ./easyrsa --batch sign-req client $2
 
